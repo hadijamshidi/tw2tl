@@ -51,11 +51,6 @@ class MyStreamListener(tweepy.StreamListener):
 
 
 following_user_ids = settings.TWITTER_USER_IDS
-# following_user_ids = ",".join([info["id"] for user, info in settings.FAVORITE_USERS.items()])
-# myStreamListener = MyStreamListener()
-# myStream = tweepy.Stream(auth=api.auth, listener=myStreamListener)
-# myStream.filter(follow=following_user_ids)
-
 while True:
     myStreamListener = MyStreamListener()
     try:
@@ -66,3 +61,16 @@ while True:
         print("Exception", myStreamListener.now())
         print(e)
         time.sleep(2)
+
+
+from telethon import TelegramClient, events
+
+client = TelegramClient('hadi', settings.TELEGRAM_API_ID, settings.TELEGRAM_API_ID_HASH)
+
+@client.on(events.NewMessage)
+async def my_event_handler(event):
+    if 'hello' in event.raw_text:
+        await event.reply('hi!')
+
+client.start()
+client.run_until_disconnected()
