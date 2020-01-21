@@ -35,7 +35,7 @@ async def my_event_handler(event):
 		if isinstance(update, UpdateNewChannelMessage):
 			# print("FROM A CHANNEL")
 			chan = await client.get_entity(event.original_update.message.to_id)
-			print("USERNAME:", chan.username)
+			# print("USERNAME:", chan.username)
 			# await forward(event.original_update.message)
 			if chan.username in settings.TELEGRAM_FAVORITE_CHANNELS:
 			# print("FORWARDING MESSAGE!")
